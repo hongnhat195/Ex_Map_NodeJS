@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Place the geocoder input outside the map</title>
+<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+<link href="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.css" rel="stylesheet">
+<script src="https://api.mapbox.com/mapbox-gl-js/v2.3.0/mapbox-gl.js"></script>
+<style>
+body { margin: 0; padding: 0; }
+#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+</style>
+</head>
+<body>
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.min.js"></script>
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v4.7.0/mapbox-gl-geocoder.css" type="text/css">
+<!-- Promise polyfill script required to use Mapbox GL Geocoder in IE 11 -->
+ <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.min.js"></script>
+
+<style>
+    .geocoder {
+        position: absolute;
+        z-index: 1;
+        width: 50%;
+        left: 50%;
+        margin-left: -25%;
+        top: 10px;
+    }
+    .mapboxgl-ctrl-geocoder {
+        min-width: 100%;
+    }
+    #map {
+        margin-top: 75px;
+    }
+</style>
+
+<div id="map" class="mt-5">
+    
+</div>
+
+<div id="geocoder" class="geocoder mb-5 pb-5">
+    {{#if status}}
+          <section class="not-search">
+               <table class="table ">
+        <thead>
+            <tr>
+                <th>MinLongitude</th>
+                <th>MinLatitude</th>
+                <th>MaxLongitude</th>
+                <th>MaxLatitude</th>
+                <th>centerLongitude</th>
+                <th>centerLatitude</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> {{minLongitude}} </td>
+                <td> {{minLatitude}} </td>
+                <td>{{maxLongitude}}</td>
+                <td> {{maxLatitude}} </td>
+                <td> {{centerLongitude}} </td>
+                <td> {{centerLatitude}} </td>
+            </tr>
+             </tbody>
+    </table>
+    <div>
+        <form action="/" class="form-search container">
+            <div class="input-group mb-3">
+                <input type="text" name="address" class="form-control mapboxgl-ctrl-geocoder--input input-search" placeholder="Vị Trí"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-search" type="submit" id="search">
+                        Tìm Kiếm
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    
+    {{else}}
+        <section class="not-search">
+    <div>
+        <form action="/" class="form-search container">
+            <div class="input-group mb-3">
+                <input type="text" name="address" class="form-control mapboxgl-ctrl-geocoder--input input-search" placeholder="Vị Trí"
+                    aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary btn-search" type="submit" id="search">
+                        Tìm Kiếm
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</section>
+    {{/if}}
+
+
+
+<script>
+	mapboxgl.accessToken = 'pk.eyJ1IjoiaW1lbHZpcyIsImEiOiJja3BxeTN0cjcwZDAxMnFtdXhzazc0d3IwIn0.HbghDHuex7t6x-_f1NoN6w';
+    var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [105, 16],
+        zoom: 0
+    });
+
+    // Add the control to the map.
+    {{!-- var geocoder = new MapboxGeocoder({
+        accessToken: mapboxgl.accessToken,
+        mapboxgl: mapboxgl
+    }); --}}
+
+  // document.getElementById('geocoder').appendChild(geocoder.onAdd(map));
+   // document.getElementsByName("input").attr("name", "address")
+</script>
+
+</body>
+</html>
